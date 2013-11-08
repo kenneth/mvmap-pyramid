@@ -1,5 +1,5 @@
 from pyramid.response import Response
-from pyramid.view import view_config
+from pyramid.view import view_config,forbidden_view_config
 
 from sqlalchemy.exc import DBAPIError
 
@@ -64,3 +64,31 @@ hello = Service(name='hello', path='/api', description="Simplest app",acl=_check
 def get_info(request):
     """Returns Hello in JSON."""
     return {'Hello': 'World'}
+
+
+@view_config(route_name='view_wiki')
+def view_wiki(request):
+    return {}
+
+@view_config(route_name='view_page', renderer='detail.mako')
+def view_page(request):
+    return {}
+
+@view_config(route_name='add_page', renderer='edit.mako', permission='edit')
+def add_page(request):
+    return {}
+
+@view_config(route_name='edit_page', renderer='edit.mako', permission='edit')
+def edit_page(request):
+    return {}
+    
+@view_config(route_name='login', renderer='login.mako')
+#@forbidden_view_config(renderer='index.mako')
+def login(request):
+    return {}
+
+@view_config(route_name='logout')
+def logout(request):
+    return {}
+
+

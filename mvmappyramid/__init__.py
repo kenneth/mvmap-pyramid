@@ -8,6 +8,8 @@ from .models import (
 
 from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
+from mvmappyramid.security import groupfinder
+
 authn_policy = AuthTktAuthenticationPolicy('seekrit', hashalg='sha512')
 authz_policy = ACLAuthorizationPolicy()
 
@@ -17,7 +19,7 @@ def main(global_config, **settings):
     engine = engine_from_config(settings, 'sqlalchemy.')
     DBSession.configure(bind=engine)
     Base.metadata.bind = engine
-    config = Configurator(settings=settings)
+    config = Configurator(settings=settings,root_factory='mvmappyramid.models.RootFactory')
     config.set_authentication_policy(authn_policy)
     config.set_authorization_policy(authz_policy)
     config.include('pyramid_chameleon')
@@ -28,5 +30,11 @@ def main(global_config, **settings):
     config.add_route('test', '/test')
     config.add_route('json', '/json')
     config.add_route('mako', '/mako')
+    config.add_route('login', '/login')
+    config.add_route('logout', '/logout')
+    config.add_route('view_wiki', '/wiki')
+    config.add_route('view_page', '/{pagename}')
+    config.add_route('add_page', '/add_page/{pagename}')
+    config.add_route('edit_page', '/{pagename}/edit_page')
     config.scan()
     return config.make_wsgi_app()

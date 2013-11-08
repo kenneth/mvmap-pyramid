@@ -1,3 +1,8 @@
+from pyramid.security import (
+    Allow,
+    Everyone,
+    )
+
 from sqlalchemy import (
     Column,
     Index,
@@ -25,3 +30,9 @@ class MyModel(Base):
     value = Column(Integer)
 
 Index('my_index', MyModel.name, unique=True, mysql_length=255)
+
+class RootFactory(object):
+    __acl__ = [ (Allow, Everyone, 'view'),
+                (Allow, 'group:editors', 'edit') ]
+    def __init__(self, request):
+        pass

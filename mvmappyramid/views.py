@@ -83,7 +83,7 @@ def edit_page(request):
     return {}
     
 @view_config(route_name='login', renderer='login.mako')
-#@forbidden_view_config(renderer='index.mako')
+@forbidden_view_config(renderer='ban.mako')
 def login(request):
     return {}
 

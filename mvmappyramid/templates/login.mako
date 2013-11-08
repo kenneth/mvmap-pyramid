@@ -1,1 +1,1 @@
-<h1>登录</h1>
+<%inherit file="base.mako"/><%block name="main">    <h1>登录</h1>    <div class="form-group">        <form action="${url}" method="post">          <input type="hidden" name="came_from" value="${came_from}" class="form-control" />          <input type="text" name="login" value="${login}" class="form-control" /><br/>          <input type="password" name="password"  value="${password}" class="form-control" /><br/>          <input type="submit" name="form.submitted" value="登录" class="btn btn-success" />        </form>    </div></%block>

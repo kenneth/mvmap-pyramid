@@ -114,7 +114,7 @@ def login(request):
             headers = remember(request, login)
             return HTTPFound(location = came_from,
                              headers = headers)
-        message = 'Failed login'
+        message = 'Login Error!!!Please Check'
 
     return dict(
         message = message,

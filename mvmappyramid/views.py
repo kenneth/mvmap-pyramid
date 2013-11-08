@@ -41,8 +41,25 @@ def test_view(request):
 def hello_world(request):
     return {'content':'Hello!'}
 
-#@view_config(route_name='mako',renderer='demo:templates/test.mako')
+#@view_config(route_name='mako',renderer='mvmappyramid:templates/test.mako')
 @view_config(route_name='mako',renderer='test.mako')
 def mako(request):
     return {'content':'Hello!'}
 
+#Cornice: A REST framework for Pyramid
+from cornice import Service
+from pyramid.security import remember, authenticated_userid, Allow, Everyone, Deny, ALL_PERMISSIONS
+
+def _check_acl(request):
+    return [
+        (Deny, Everyone, ALL_PERMISSIONS),
+        (Allow, 'admin', 'add'),
+        (Allow, 'admin', 'view')
+    ]
+
+hello = Service(name='hello', path='/api', description="Simplest app",acl=_check_acl)
+
+@hello.get(permission='add')
+def get_info(request):
+    """Returns Hello in JSON."""
+    return {'Hello': 'World'}

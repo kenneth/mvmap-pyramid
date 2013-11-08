@@ -85,7 +85,8 @@ def view_wiki(request):
 
 @view_config(route_name='view_page', renderer='detail.mako')
 def view_page(request):
-    return {}
+    pagename = request.matchdict['pagename']
+    return dict(pagename = pagename)
 
 @view_config(route_name='add_page', renderer='edit.mako', permission='edit')
 def add_page(request):

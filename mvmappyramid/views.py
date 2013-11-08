@@ -33,3 +33,16 @@ After you fix the problem, please restart the Pyramid application to
 try it again.
 """
 
+@view_config(route_name='test', renderer='templates/test.pt')
+def test_view(request):
+    return {'project': 'demo'}
+
+@view_config(route_name='json',renderer='json')
+def hello_world(request):
+    return {'content':'Hello!'}
+
+#@view_config(route_name='mako',renderer='demo:templates/test.mako')
+@view_config(route_name='mako',renderer='test.mako')
+def mako(request):
+    return {'content':'Hello!'}
+

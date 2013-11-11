@@ -29,5 +29,14 @@
         % endfor
         </tr>
     </%def>
+    
+    <%doc>
+    these are comments
+    more comments
+    </%doc>
+    
+    ${self.body()}
+    
+    <%page cached="True" cache_type="memory"/>
 
 </%block>

@@ -27,6 +27,7 @@ def main(global_config, **settings):
     config.set_authorization_policy(authz_policy)
     config.include('pyramid_chameleon')
     config.include('pyramid_mako')
+    config.include('pyramid_beaker')
     config.include('cornice')
     config.add_static_view('static', 'static', cache_max_age=3600)
     config.add_route('home', '/')

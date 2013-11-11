@@ -24,7 +24,7 @@ from .models import (
 import json
 
 #@view_config(route_name='home', renderer='templates/mytemplate.pt')
-@view_config(route_name='home',renderer='index.mako')
+@view_config(route_name='home',renderer='index.html')
 def my_view(request):
     try:
         one = DBSession.query(MyModel).filter(MyModel.name == 'one').first()
@@ -56,8 +56,8 @@ def test_view(request):
 def hello_world(request):
     return {'content':'Hello!'}
 
-#@view_config(route_name='mako',renderer='mvmappyramid:templates/test.mako')
-@view_config(route_name='mako',renderer='test.mako')
+#@view_config(route_name='mako',renderer='mvmappyramid:templates/test.html')
+@view_config(route_name='mako',renderer='test.html')
 def mako(request):
     return {'content':'Hello!'}
 
@@ -80,25 +80,25 @@ def get_info(request):
     return {'Hello': 'World'}
 
 
-@view_config(route_name='view_wiki', renderer='wiki.mako')
+@view_config(route_name='view_wiki', renderer='wiki.html')
 def view_wiki(request):
     return {}
 
-@view_config(route_name='view_page', renderer='detail.mako')
+@view_config(route_name='view_page', renderer='detail.html')
 def view_page(request):
     pagename = request.matchdict['pagename']
     return dict(pagename = pagename)
 
-@view_config(route_name='add_page', renderer='edit.mako', permission='edit')
+@view_config(route_name='add_page', renderer='edit.html', permission='edit')
 def add_page(request):
     return {}
 
-@view_config(route_name='edit_page', renderer='edit.mako', permission='edit')
+@view_config(route_name='edit_page', renderer='edit.html', permission='edit')
 def edit_page(request):
     return {}
     
-@view_config(route_name='login', renderer='login.mako')
-@forbidden_view_config(renderer='ban.mako')
+@view_config(route_name='login', renderer='login.html')
+@forbidden_view_config(renderer='ban.html')
 def login(request):
     login_url = request.route_url('login')
     referrer = request.url

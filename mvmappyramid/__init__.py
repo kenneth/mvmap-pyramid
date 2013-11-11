@@ -13,13 +13,16 @@ from mvmappyramid.security import groupfinder
 authn_policy = AuthTktAuthenticationPolicy('seekrit', hashalg='sha512')
 authz_policy = ACLAuthorizationPolicy()
 
+from pyramid.session import UnencryptedCookieSessionFactoryConfig
+my_session_factory = UnencryptedCookieSessionFactoryConfig('itsaseekreet')
+
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
     engine = engine_from_config(settings, 'sqlalchemy.')
     DBSession.configure(bind=engine)
     Base.metadata.bind = engine
-    config = Configurator(settings=settings,root_factory='mvmappyramid.models.RootFactory')
+    config = Configurator(settings=settings,root_factory='mvmappyramid.models.RootFactory',session_factory = my_session_factory)
     config.set_authentication_policy(authn_policy)
     config.set_authorization_policy(authz_policy)
     config.include('pyramid_chameleon')
@@ -28,6 +31,7 @@ def main(global_config, **settings):
     config.add_static_view('static', 'static', cache_max_age=3600)
     config.add_route('home', '/')
     config.add_route('test', '/test')
+    config.add_route('session', '/session')
     config.add_route('json', '/json')
     config.add_route('mako', '/mako')
     config.add_route('login', '/login')

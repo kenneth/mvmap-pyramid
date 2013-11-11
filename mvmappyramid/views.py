@@ -130,4 +130,15 @@ def logout(request):
     return HTTPFound(location = request.route_url('view_wiki'),
                      headers = headers)
 
+@view_config(route_name='session')
+def session_view(request):
+    session = request.session
+    if 'abc' in session:
+        session['fred'] = 'yes'
+    session['abc'] = '123'
+    if 'fred' in session:
+        return Response('Fred was in the session')
+    else:
+        return Response('Fred was not in the session')
+
 

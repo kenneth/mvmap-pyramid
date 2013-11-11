@@ -21,6 +21,7 @@ from .models import (
     MyModel,
     )
 
+import json
 
 #@view_config(route_name='home', renderer='templates/mytemplate.pt')
 @view_config(route_name='home',renderer='index.mako')
@@ -140,5 +141,14 @@ def session_view(request):
         return Response('Fred was in the session')
     else:
         return Response('Fred was not in the session')
+        
+@view_config(route_name='acl',renderer='json')
+def acl_view(request):
+    d = {
+        'admin':{'ios': 'view','android': 'add'},
+        'test':{'ios':'view','android':'view'}
+    }
+    json_string = json.dumps(d)
+    return Response(json_string)
 
 

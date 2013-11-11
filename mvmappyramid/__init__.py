@@ -33,6 +33,7 @@ def main(global_config, **settings):
     config.add_route('test', '/test')
     config.add_route('session', '/session')
     config.add_route('json', '/json')
+    config.add_route('acl', '/acl')
     config.add_route('mako', '/mako')
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')

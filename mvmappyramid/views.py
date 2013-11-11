@@ -111,7 +111,7 @@ def login(request):
     if 'form.submitted' in request.params:
         login = request.params['login']
         password = request.params['password']
-        print "========================================"+USERS.get(login)
+        #print "========================================"+USERS.get(login)
         if USERS.get(login) == password:
             headers = remember(request, login)
             return HTTPFound(location = came_from,headers = headers)

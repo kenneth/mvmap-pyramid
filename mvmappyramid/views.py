@@ -111,11 +111,12 @@ def login(request):
     if 'form.submitted' in request.params:
         login = request.params['login']
         password = request.params['password']
+        print "========================================"+USERS.get(login)
         if USERS.get(login) == password:
             headers = remember(request, login)
-            return HTTPFound(location = came_from,
-                             headers = headers)
-        message = 'Login Error!!!Please Check'
+            return HTTPFound(location = came_from,headers = headers)
+        else:
+            message = 'Login Error!!!Please Check'
 
     return dict(
         message = message,

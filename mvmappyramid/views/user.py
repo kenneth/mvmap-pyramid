@@ -41,8 +41,8 @@ def set_info(request):
     _USERS[username] = request.json_body
     return {'success': True}
 
-
-@view_config(route_name="whoami", permission="authenticated", renderer="json")
+#@view_config(route_name="whoami", permission="authenticated", renderer="json")
+@view_config(route_name="whoami", permission="edit", renderer="json")
 #@view_config(route_name="whoami", renderer="json")
 def whoami(request):
     """View returning the authenticated user's credentials."""

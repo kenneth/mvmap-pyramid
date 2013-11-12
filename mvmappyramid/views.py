@@ -56,7 +56,7 @@ try it again.
 
 @view_config(route_name='test', renderer='templates/test.pt')
 def test_view(request):
-    return {'project': 'demo'}
+    return {'project': 'mvmap-pyramid'}
 
 @view_config(route_name='json',renderer='json')
 def hello_world(request):

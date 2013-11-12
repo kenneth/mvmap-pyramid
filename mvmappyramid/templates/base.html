@@ -1,11 +1,19 @@
 <%include file="header.html"/>
-
+<title><%block name="title"></%block></title>
+</head>
+<body>
 <%include file="navbar.html"/>
 
 <div class="jumbotron"></div>
 <div class="container">
-  <%block name="main">
-  </%block>
+<div class="row">
+  <div class="col-md-8">
+    <%block name="main"></%block>
+  </div>
+  <div class="col-md-4">
+    <%block name="sidebar"></%block>
+  </div>
+</div>
 </div>
 
 <%include file="footer.html"/>

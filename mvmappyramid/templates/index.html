@@ -37,8 +37,10 @@
     more comments
     </%doc>
     
-    ${self.body()}
-    
     <%page cached="True" cache_type="memory"/>
 
+</%block>
+
+<%block name="sidebar">
+    ${self.body()}
 </%block>

@@ -1,7 +1,7 @@
 from pyramid.config import Configurator
 from sqlalchemy import engine_from_config
 
-from .models import (
+from .models.base import (
     DBSession,
     Base,
     )
@@ -22,7 +22,7 @@ def main(global_config, **settings):
     engine = engine_from_config(settings, 'sqlalchemy.')
     DBSession.configure(bind=engine)
     Base.metadata.bind = engine
-    config = Configurator(settings=settings,root_factory='mvmappyramid.models.RootFactory',session_factory = my_session_factory)
+    config = Configurator(settings=settings,root_factory='mvmappyramid.models.base.RootFactory',session_factory = my_session_factory)
     config.set_authentication_policy(authn_policy)
     config.set_authorization_policy(authz_policy)
     config.include('pyramid_chameleon')

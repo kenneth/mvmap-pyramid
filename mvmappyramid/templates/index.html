@@ -3,9 +3,11 @@
 <%block name="title">Mvmap-Pyramid项目首页</%block>
 
 <%block name="main">
+    % if logged_in != None:
     <span>
-       <a href="${request.application_url}/logout">登出</a>
+       欢迎您:${logged_in}<a href="${request.application_url}/logout">登出</a>
     </span>
+    % endif
     
     <ul>
     % for a in ("one", "two", "three"):

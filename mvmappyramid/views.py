@@ -30,7 +30,13 @@ def my_view(request):
         one = DBSession.query(MyModel).filter(MyModel.name == 'one').first()
     except DBAPIError:
         return Response(conn_err_msg, content_type='text/plain', status_int=500)
-    return {'one': one, 'project': 'mvmap-pyramid'}
+    #return {'one': one, 'project': 'mvmap-pyramid'}
+    return dict(
+        one = one,
+        project = 'mvmap-pyramid',
+        logged_in = authenticated_userid(request)
+        )
+
 
 conn_err_msg = """\
 Pyramid is having a problem using your SQL database.  The problem
@@ -124,6 +130,7 @@ def login(request):
         came_from = came_from,
         login = login,
         password = password,
+        logged_in = authenticated_userid(request)
         )
 
 @view_config(route_name='logout')
